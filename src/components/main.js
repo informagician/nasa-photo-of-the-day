@@ -22,6 +22,9 @@ function Main(props) {
                 console.log("Broken ROboT!");
             })
     }, [date])
+    if (!props) { 
+        return <h3>Loading...</h3>;
+    } else {
     return (
         <main>
             <button onClick={() => {setDate(dayBefore);setDayCount(dayCount-1)}}>Previous Day</button>
@@ -30,9 +33,11 @@ function Main(props) {
             <h1>{apod.title}</h1>
             <p>Date: {apod.date}</p>
             <p>{apod.explanation}</p>
-            <img src={apod.url} alt={apod.title} />
+            <img src={apod.url} alt={apod.title} style={{display: apod.media_type == 'image' ? 'block' : 'none'}} />
+            <iframe src={apod.url} alt={apod.title} style={{display: apod.media_type == 'video' ? 'block' : 'none'}}></iframe>
         </main>
     );
+    }
 }
 
 
