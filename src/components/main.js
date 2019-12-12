@@ -30,14 +30,14 @@ function Main(props) {
     } else {
     return (
         <main>
-            <Button onClick={() => {setDate(dayBefore);setDayCount(--dayCount)}}>Previous Day</Button>
-            <button onClick={() => {setDate(today);setDayCount(0)}}>Today</button>
-            <button onClick={() => {setDate(dayAfter);setDayCount(++dayCount)}} disabled={(today === currentDate) ? true : false}>Next Day</button>
+            <Button color="primary" onClick={() => {setDate(dayBefore);setDayCount(--dayCount)}}>Previous Day</Button>
+            <Button onClick={() => {setDate(today);setDayCount(0)}}>Today</Button>
+            <Button onClick={() => {setDate(dayAfter);setDayCount(++dayCount)}} disabled={(today === currentDate) ? true : false} color={(today === currentDate) ? "secondary" : "primary"}>Next Day</Button>
             <h1>{apod.title}</h1>
-            <p>Date: {apod.date}</p>
-            <p>{apod.explanation}</p>
             <img src={apod.url} alt={apod.title} style={{display: apod.media_type === 'image' ? 'block' : 'none'}} />
             <iframe src={apod.url} title={apod.title} style={{display: apod.media_type === 'video' ? 'block' : 'none'}}></iframe>
+            <p>Date: {apod.date}</p>
+            <p>{apod.explanation}</p>
         </main>
     );
     }
