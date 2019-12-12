@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Button } from 'reactstrap';
 
 const axios = require('axios');
 
@@ -29,7 +30,7 @@ function Main(props) {
     } else {
     return (
         <main>
-            <button onClick={() => {setDate(dayBefore);setDayCount(--dayCount)}}>Previous Day</button>
+            <Button onClick={() => {setDate(dayBefore);setDayCount(--dayCount)}}>Previous Day</Button>
             <button onClick={() => {setDate(today);setDayCount(0)}}>Today</button>
             <button onClick={() => {setDate(dayAfter);setDayCount(++dayCount)}} disabled={(today === currentDate) ? true : false}>Next Day</button>
             <h1>{apod.title}</h1>
