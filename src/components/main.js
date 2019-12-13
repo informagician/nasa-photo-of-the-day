@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button } from 'reactstrap';
 
+
 const axios = require('axios');
 
 function Main(props) {
@@ -9,11 +10,16 @@ function Main(props) {
     var [dayCount, setDayCount] = useState(0);
 
     var today = (new Date()).toISOString().split('T')[0];
-    var dayBefore = (new Date(Date.now() - (Math.abs(dayCount-1) * 86400000))).toISOString().split('T')[0];
-    var dayAfter = (new Date(Date.now() - (Math.abs(dayCount+1) * 86400000))).toISOString().split('T')[0];
+    var dayBefore = (new Date(Date.now() - (Math.abs(dayCount - 1) * 86400000))).toISOString().split('T')[0];
+    var dayAfter = (new Date(Date.now() - (Math.abs(dayCount + 1) * 86400000))).toISOString().split('T')[0];
     var currentDate = date;
     var test = (new Date()).toString().split('T')[0];
     console.log(test);
+
+    function prevDay() {
+        setDate(dayBefore);
+        setDayCount(--dayCount);
+    }
 
     useEffect(() => {
         axios.get(`https://api.nasa.gov/planetary/apod?api_key=IxChViHyyrlKLnnbDRB8mQt16hd8f22mYI9TefeR&date=${date}`)
@@ -30,7 +36,7 @@ function Main(props) {
     } else {
     return (
         <main>
-            <Button color="primary" onClick={() => {setDate(dayBefore);setDayCount(--dayCount)}}>Previous Day</Button>
+            <Button color="primary" onClick={prevDay}>Previous Day</Button>
             <Button onClick={() => {setDate(today);setDayCount(0)}}>Today</Button>
             <Button onClick={() => {setDate(dayAfter);setDayCount(++dayCount)}} disabled={(today === currentDate) ? true : false} color={(today === currentDate) ? "secondary" : "primary"}>Next Day</Button>
             <h1>{apod.title}</h1>
